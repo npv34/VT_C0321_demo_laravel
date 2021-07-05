@@ -37,16 +37,20 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($users as $key => $user)
+                        @forelse($users as $key => $user)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->address }}</td>
-                            <td><img src="" alt=""></td>
+                            <td><img src="{{ asset('storage/' . $user->image) }}" width="150" alt=""></td>
                             <td><a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger">Delete</a></td>
                         </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">No data</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
